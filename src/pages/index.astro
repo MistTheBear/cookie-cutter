@@ -1,6 +1,11 @@
 ---
+import { getCollection } from "astro:content";
+
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
+
+const paperEntries = await getCollection("papers");
+const talksEntries = await getCollection("talks");
 ---
 
 <Layout title="Welcome to Astro.">
@@ -9,8 +14,7 @@ import Card from "../components/Card.astro";
 		<p class="instructions">
 			To get started, open the directory <code>src/pages</code> in your project.<br
 			/>
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message
-			above.
+			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
 		</p>
 		<ul role="list" class="link-card-grid">
 			<Card
@@ -34,6 +38,36 @@ import Card from "../components/Card.astro";
 				body="Come say hi to our amazing Discord community. ❤️"
 			/>
 		</ul>
+		<section class="my-16">
+			<h2 class="text-2xl">Papers</h2>
+			<ul class="mt-4">
+				{
+					paperEntries.map((paperEntry) => (
+						<li class="mt-4">
+							<div>{paperEntry.data.title}</div>
+							<time datetime={paperEntry.data.date.toISOString()}>
+								{paperEntry.data.date.toDateString()}
+							</time>
+						</li>
+					))
+				}
+			</ul>
+		</section>
+		<section class="my-16">
+			<h2 class="text-2xl">Talks</h2>
+			<ul class="mt-4">
+				{
+					talksEntries.map((talkEntry) => (
+						<li class="mt-4">
+							<div>{talkEntry.data.title}</div>
+							<time datetime={talkEntry.data.date.toISOString()}>
+								{talkEntry.data.date.toDateString()}
+							</time>
+						</li>
+					))
+				}
+			</ul>
+		</section>
 	</main>
 </Layout>
 
