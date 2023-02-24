@@ -5,7 +5,7 @@ import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 
 const paperEntries = await getCollection("papers");
-const talksEntries = await getCollection("talks");
+const talkEntries = await getCollection("talks");
 ---
 
 <Layout title="Welcome to Astro.">
@@ -37,6 +37,21 @@ const talksEntries = await getCollection("talks");
 				title="Community"
 				body="Come say hi to our amazing Discord community. ❤️"
 			/>
+			<Card
+				href="/research"
+				title="Research"
+				body="Research Themes and Highlights"
+			/>
+			<Card
+				href="/research/papers"
+				title="Papers"
+				body="Research Papers and Publications"
+			/>
+			<Card
+				href="/research/talks"
+				title="Talks"
+				body="Research Talks and Presentations"
+			/>
 		</ul>
 		<section class="my-16">
 			<h2 class="text-2xl">Papers</h2>
@@ -57,7 +72,7 @@ const talksEntries = await getCollection("talks");
 			<h2 class="text-2xl">Talks</h2>
 			<ul class="mt-4">
 				{
-					talksEntries.map((talkEntry) => (
+					talkEntries.map((talkEntry) => (
 						<li class="mt-4">
 							<div>{talkEntry.data.title}</div>
 							<time datetime={talkEntry.data.date.toISOString()}>
