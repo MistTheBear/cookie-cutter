@@ -1,0 +1,20 @@
+---
+import { getCollection } from "astro:content";
+import Paper from "../../components/Paper.astro";
+
+import Layout from "../../layouts/Layout.astro";
+
+const paperEntries = await getCollection("papers");
+---
+
+<Layout title="Research Papers">
+  <main>
+    <h1>Research Papers</h1>
+    <section>
+      <h2>Papers</h2>
+      <ul>
+        {paperEntries.map((paperEntry) => <Paper entry={paperEntry} />)}
+      </ul>
+    </section>
+  </main>
+</Layout>
